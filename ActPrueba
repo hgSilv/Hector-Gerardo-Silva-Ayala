@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//JFrancisco Cervantes
+//Hector Silva
 
 int main()
 {
-    int desp, i, limit = 0;
+    int desp, i = 0;
     char str[50];
     printf("Ingresa una cadena\n");
     gets(str);
