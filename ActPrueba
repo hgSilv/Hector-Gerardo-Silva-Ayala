@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//JFrancisco Cervantes
+
+int main()
+{
+    int desp, i, limit = 0;
+    char str[50];
+    printf("Ingresa una cadena\n");
+    gets(str);
+    printf("Ingresa un desplazamiento\n");
+    scanf("%d", &desp);
+    for(i=0;i<strlen(str);i++)
+    {
+        str[i]=str[i]+desp;
+        if(str[i]>90)
+            str[i]=str[i]-26;
+    }
+    printf("Encriptado: %s\n", str);
+    printf("Desplazamiento: %d\n", i);
+
+
+
+
+    return 0;
+}
