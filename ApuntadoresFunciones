@@ -1,0 +1,83 @@
+#include <stdio.h>
+void saludar();
+void despedirse ();
+void imprimirDoble(int x);
+void imprimirTriple (int x);
+int sumar(int a, int b);
+int restar(int a, int b);
+
+typedef void (*funcionS) (void);
+typedef void (*funcionI) (int);
+typedef int (*funcionM) (int, int);
+
+void* ejecuta(void * n1,void * n2, funcionM fm);
+
+int main()
+{
+    funcionS fs;
+    fs=saludar;
+    fs();
+    
+    int r;
+    funcionM fm;
+    fm=sumar;
+    r=fm(2,3);
+    printf("Suma: %d \n", r);
+    fm=restar;
+    r=fm(2,3);
+    printf("Resta: %d \n", r);
+    fs=despedirse;
+    fs();
+    
+    int *rp;
+    rp=&r;
+    int n1=2;
+    int n2=3;
+    rp=ejecuta(&n1,&n2,sumar);
+    
+    return 0;
+}
+
+void* ejecuta(void * n1,void * n2, funcionM fm)
+{
+    int *v1=(int *)n1;
+    int *v2=(int *)n2;
+    int r;
+    r= fm(*v1,*v2);
+    
+    
+}
+
+void saludar()
+{
+    printf("Hola \n");
+}
+
+void despedirse()
+{
+    printf("Adios \n");
+}
+
+void imprimirDoble(int x)
+{
+    printf("%d, %d",x, x);
+}
+
+void imprimirTriple(int x)
+{
+    printf("%d, %d, %d", x, x, x);
+}
+
+int sumar(int a, int b)
+{
+    int r;
+    r=a+b;
+    return r;
+}
+
+int restar(int a, int b)
+{
+    int r;
+    r=a-b;
+    return r;
+}
