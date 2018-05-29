@@ -8,7 +8,7 @@ typedef struct{
 } Profesor;
 
 float averageArray(Profesor arr[]  , int x);
-void readArray(Profesor *arr, int x);
+void readArray(Profesor arr[], int x);
 void mergeArrays(Profesor arr[] , int x, Profesor profe2, int y, Profesor profe3, int z);
 void sortArray(Profesor arr[], int x);
 void printArray(Profesor *arr , int x);
@@ -26,7 +26,7 @@ readArray(arr1, n1); //leer el primer arreglo
 //sortArray(arrF,);  //Ordenar los elementos del tercer arreglo, recuerde que pueden 
   //existir profesores repetidos
 
-//printArray(___________);   //Imprimir el resultado final
+printArray(arr1 , n1);   //Imprimir el resultado final
 }
 
 void readArray(Profesor *arr, int x)
@@ -34,21 +34,24 @@ void readArray(Profesor *arr, int x)
     int c;
     printf("Cuantos profes hay en esta lista?: ");
 	scanf("%d", &x);
-    for(c=0; c<x; c++)
+    for(c=0; c<=x; c++)
     {
         gets(arr[c].nombre);
         scanf("%f",arr[c].calificacion);
+        getchar();
     }
 }
 
 void printArray(Profesor *arr , int x)
 {
-    int c;
-    Profesor p; //usar apuntadores locales como bandera
-    *p
+//    Profesor *p;
+    int c, i;
     for(c=0;c<x;c++)
-        {
-            printf("%c", )
-        }
-    printf()
+    {
+        for(i=0;i<(sizeof(arr[c].nombre[i]));i++)
+            printf("%c",arr[c].nombre[i]);
+            
+        printf("%f",arr[c].calificacion);
+    }
+    //printf()
 }
