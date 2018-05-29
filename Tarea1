@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+
+typedef struct{
+	char nombre[15];
+	float calificacion;
+} Profesor;
+
+float averageArray(Profesor arr[]  , int x);
+void readArray(Profesor *arr, int x);
+void mergeArrays(Profesor arr[] , int x, Profesor profe2, int y, Profesor profe3, int z);
+void sortArray(Profesor arr[], int x);
+void printArray(Profesor arr[] , int x);
+
+
+void main(){
+	Profesor arr1[20];  //Primer arreglo
+	Profesor arr2[20];  //Segundo arreglo
+	Profesor arrF[40];  //Arreglo final, con elementos fusionados y ordenados
+	int n1, n2, n3; //Longitud de los arreglos
+readArray(arr1, n1); //leer el primer arreglo
+readArray(arr2, n2); //leer el segundo arreglo 
+mergeArrays(arr1, n1, arr2, n2);  //Fusionar los dos arreglos en un tercer arreglo
+
+sortArray(arrF,);  //Ordenar los elementos del tercer arreglo, recuerde que pueden 
+  //existir profesores repetidos
+
+printArray(___________);   //Imprimir el resultado final
+
+
+
+return 0;
+}
+
+void readArray(Profesor *arr, int x)
+{
+    int c;
+    print("Cuantos profes hay en esta lista?: ");
+	scanf("%d", &x);
+    for(c=0; c<x; c++)
+    {
+        gets(arr->nombre);
+        scanf("%f",arr->calificacion);
+    }
+}
