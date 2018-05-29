@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 
@@ -17,29 +18,25 @@ void main(){
 	Profesor arr1[20];  //Primer arreglo
 	Profesor arr2[20];  //Segundo arreglo
 	Profesor arrF[40];  //Arreglo final, con elementos fusionados y ordenados
-	int n1, n2, n3; //Longitud de los arreglos
+	int n1, n2; //Longitud de los arreglos
 readArray(arr1, n1); //leer el primer arreglo
-readArray(arr2, n2); //leer el segundo arreglo 
-mergeArrays(arr1, n1, arr2, n2);  //Fusionar los dos arreglos en un tercer arreglo
+//readArray(arr2, n2); //leer el segundo arreglo 
+//mergeArrays(arr1, n1, arr2, n2);  //Fusionar los dos arreglos en un tercer arreglo
 
-sortArray(arrF,);  //Ordenar los elementos del tercer arreglo, recuerde que pueden 
+//sortArray(arrF,);  //Ordenar los elementos del tercer arreglo, recuerde que pueden 
   //existir profesores repetidos
 
-printArray(___________);   //Imprimir el resultado final
-
-
-
-return 0;
+//printArray(___________);   //Imprimir el resultado final
 }
 
 void readArray(Profesor *arr, int x)
 {
     int c;
-    print("Cuantos profes hay en esta lista?: ");
+    printf("Cuantos profes hay en esta lista?: ");
 	scanf("%d", &x);
     for(c=0; c<x; c++)
     {
-        gets(arr->nombre);
-        scanf("%f",arr->calificacion);
+        gets(arr[c].nombre);
+        scanf("%f",arr[c].calificacion);
     }
 }
