@@ -11,7 +11,7 @@ float averageArray(Profesor arr[]  , int x);
 void readArray(Profesor *arr, int x);
 void mergeArrays(Profesor arr[] , int x, Profesor profe2, int y, Profesor profe3, int z);
 void sortArray(Profesor arr[], int x);
-void printArray(Profesor arr[] , int x);
+void printArray(Profesor *arr , int x);
 
 
 void main(){
@@ -39,4 +39,16 @@ void readArray(Profesor *arr, int x)
         gets(arr[c].nombre);
         scanf("%f",arr[c].calificacion);
     }
+}
+
+void printArray(Profesor *arr , int x)
+{
+    int c;
+    Profesor p; //usar apuntadores locales como bandera
+    *p
+    for(c=0;c<x;c++)
+        {
+            printf("%c", )
+        }
+    printf()
 }
