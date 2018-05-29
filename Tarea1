@@ -10,7 +10,7 @@ float averageArray(Profesor arr[]  , int x);
 void readArray(Profesor *arr, int x);
 void mergeArrays(Profesor arr[] , int x, Profesor profe2, int y, Profesor profe3, int z);
 void sortArray(Profesor arr[], int x);
-void printArray(Profesor *arr , int x);
+void printArray(Profesor arr[], int x);
 
 
 void main(){
@@ -18,6 +18,8 @@ void main(){
 	Profesor arr2[20];  //Segundo arreglo
 	Profesor arrF[40];  //Arreglo final, con elementos fusionados y ordenados
 	int n1, n2; //Longitud de los arreglos
+	printf("Cuantos profes hay en esta lista?: ");
+	scanf("%d", &n1);
 readArray(arr1, n1); //leer el primer arreglo
 //readArray(arr2, n2); //leer el segundo arreglo 
 //mergeArrays(arr1, n1, arr2, n2);  //Fusionar los dos arreglos en un tercer arreglo
@@ -25,31 +27,28 @@ readArray(arr1, n1); //leer el primer arreglo
 //sortArray(arrF,);  //Ordenar los elementos del tercer arreglo, recuerde que pueden 
   //existir profesores repetidos
 
-//printArray(arr1 , n1);   //Imprimir el resultado final
+printArray(arr1 , n1);   //Imprimir el resultado final
 }
 
 void readArray(Profesor *arr, int x)
 {
     //Profesor p = arr;
-    printf("Cuantos profes hay en esta lista?: ");
-	scanf("%d", &x);
     for(int c=0; c<x; c++)
     {
         scanf("%s",(*(arr+c)).nombre);
         scanf("%f",&(*(arr+c)).calificacion);
+        getchar();
     }
 }
 
-/*void printArray(Profesor *arr , int x)
+void printArray(Profesor arr[] , int x)
 {
-//    Profesor *p;
-    int c, i;
+    Profesor *p = arr;
+    int c;
     for(c=0;c<x;c++)
     {
-        for(i=0;i<(sizeof(arr[c].nombre[i]));i++)
-            printf("%c",arr[c].nombre[i]);
-            
-        printf("%f",arr[c].calificacion);
+        printf("%s \t\t",(p+c)->nombre);
+        printf("%.2f \n",(p+c)->calificacion);
     }
     //printf()
 }*/
