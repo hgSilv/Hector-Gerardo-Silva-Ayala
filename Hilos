@@ -1,0 +1,37 @@
+
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
+
+typedef struct{
+    int x, y;
+}param;
+
+DWORD WINAPI funcionInicial(void *);
+
+int main(void)
+{
+    param datos ={1,2};
+    HANDLE h;
+    h=CreateTrhead(
+        NULL,           //Seguridad por default
+        0,              //Tamaño de stack por default
+        funcionInicial, 
+        (void *)&datos, //parametros de entrada al crear el hilo
+        0,              //Se ejecuta de manera inmediata
+        NULL
+        );
+        printf("Fin del flujo principal ... \n");
+        WaitForSingleObject(h, INFINITE);
+        return 0;
+    return 0;
+}
+
+DWORD WINAPI funcionInicial(void *)
+{
+    //Imprimir parametros de entrada
+    param *d=(param*)p;
+    printf("X = %d, Y = %d \n", d->x, d->y);
+    printf("Fin del hilo...\n");
+    return 0;
+}
