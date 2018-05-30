@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void)
+{
+    int *ad=(int *)malloc(sizeof(int)*5);
+    int i=0;
+    for(i=0;i<5;i++)
+        ad[i]=i;
+    
+    for(i=0;i<5;i++)
+        printf("%d",ad[i]);
+    free(ad);
+    
+    return 0;
+}
