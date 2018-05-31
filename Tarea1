@@ -10,8 +10,7 @@ typedef struct
 
 int findMatch (Profesor * arr, int x);
 void readArray (Profesor * arr, int x);
-void mergeArrays (Profesor * arr1, int x, Profesor * arr2, int y,
-		  Profesor * arr3, int z);
+void mergeArrays (Profesor * arr1, int x, Profesor * arr2, int y, Profesor * arr3, int z);
 void sortArray (Profesor *arr, int x);
 void printArray (Profesor arr[], int x);
 
@@ -116,3 +115,24 @@ int findMatch(Profesor *arr  , int x)
     return *ptr;
 }
 
+void sortArray (Profesor *arr, int x)
+{
+    Profesor *p = arr;
+    Profesor bandera;
+    int i, c;
+    for(i=0;i<x-1;i++)
+    {
+        for(c=i+1;c<x;c++)
+        {
+            if((p+i)->calificacion<(p+c)->calificacion)
+            {
+                strcpy(bandera.nombre,(p+c)->nombre);
+                strcpy((p+c)->nombre, (p+i)->nombre);
+                strcpy((p+i)->nombre, bandera.nombre);
+                bandera.calificacion = (p+c)->calificacion;
+                (p+c)->calificacion = (p+i)->calificacion;
+                (p+i)->calificacion = bandera.calificacion;
+            }
+        }
+    }
+}
