@@ -80,11 +80,34 @@ mergeArrays (Profesor *arr1, int x, Profesor *arr2, int y, Profesor *arr3, int z
       //printf ("%s, %.2f\n", (p + c)->nombre, (p + c)->calificacion);
     }				//Se copian los valores de la segunda lista lista a la lista final
 
-  //findMatch(*arr3, z);
+  findMatch(arr3, z);
 }
 
-/*void findMatch(Profesor *arr  , int x)
+void findMatch(Profesor *arr  , int x)
 {
-    Profesor p* = arr;
-    
-}*/
+    Profesor *p = arr;
+    int i, c, pos, dvi;
+    int *ptr;
+    ptr = &x;
+    float acc;
+    for(i=0;i<x-1;i++)
+    {
+    acc=(p+i)->calificacion;
+    dvi=1;
+        for(c=i+1;c<x;c++)
+        {
+            if(strcmp((p+i)->nombre, (p+c)->nombre)==0)
+                {
+                    dvi++;
+                    acc=(acc+(p+c)->calificacion);
+                    for(pos=c+1;pos<x;pos++)
+                    {
+                        strcpy((p+pos-1)->nombre,(p+pos)->nombre);
+                        (p+pos-1)->calificacion,(p+pos)->calificacion;
+                    }
+                    *ptr = *ptr - 1;
+                }
+        }
+    (p+i)->calificacion = acc/dvi;
+    }
+}
