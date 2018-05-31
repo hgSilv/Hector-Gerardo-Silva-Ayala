@@ -96,18 +96,19 @@ void findMatch(Profesor *arr  , int x)
     dvi=1;
         for(c=i+1;c<x;c++)
         {
-            if(strcmp((p+i)->nombre, (p+c)->nombre)==0)
+            if(strcmp((p+i)->nombre, (p+c)->nombre)==0) //Busca matches de nombres en la lista
                 {
-                    dvi++;
-                    acc=(acc+(p+c)->calificacion);
-                    for(pos=c+1;pos<x;pos++)
+                    dvi++; //El Divisor aumenta en 1.
+                    acc=(acc+(p+c)->calificacion); //Se suman las calificaciones en un acumulador
+                    for(pos=c+1;pos<x;pos++) //Recorre un espacio a todos los elementos en la lista para eliminar al repetido.
                     {
                         strcpy((p+pos-1)->nombre,(p+pos)->nombre);
-                        (p+pos-1)->calificacion,(p+pos)->calificacion;
+                        (p+pos-1)->calificacion=(p+pos)->calificacion; //Se copian los valores del Profesor siguiente en la lista a la posicion actual.
                     }
-                    *ptr = *ptr - 1;
+                    *ptr = *ptr - 1; // tamaño de ArrF disminuye
                 }
         }
-    (p+i)->calificacion = acc/dvi;
+    (p+i)->calificacion = acc/dvi; //Se obtiene el promedio de la calificacion
     }
 }
+
