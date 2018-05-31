@@ -2,80 +2,92 @@
 #include <string.h>
 
 
-typedef struct{
-	char nombre[15];
-	float calificacion;
+typedef struct
+{
+  char nombre[15];
+  float calificacion;
 } Profesor;
 
-void findMatch(Profesor *arr  , int x);
-void readArray(Profesor *arr, int x);
-void mergeArrays(Profesor *arr1 , int x, Profesor *arr2, int y, Profesor *arr3, int z);
-void sortArray(Profesor arr[], int x);
-void printArray(Profesor arr[], int x);
+void findMatch (Profesor * arr, int x);
+void readArray (Profesor * arr, int x);
+void mergeArrays (Profesor * arr1, int x, Profesor * arr2, int y,
+		  Profesor * arr3, int z);
+void sortArray (Profesor arr[], int x);
+void printArray (Profesor arr[], int x);
 
 
-void main(){
-	Profesor arr1[20];  //Primer arreglo
-	Profesor arr2[20];  //Segundo arreglo
-	Profesor arrF[40];  //Arreglo final, con elementos fusionados y ordenados
-	int n1, n2, n3; //Longitud de los arreglos
-	printf("Cuantos profes hay en la primer lista?: ");
-	scanf("%d", &n1);
-	printf("Cuantos profes hay en la segunda lista?: ");
-	scanf("%d", &n2);
-readArray(arr1, n1); //leer el primer arreglo
-readArray(arr2, n2); //leer el segundo arreglo 
-mergeArrays(arr1, n1, arr2, n2, arrF, n3);  //Fusionar los dos arreglos en un tercer arreglo
+void
+main ()
+{
+  Profesor arr1[20];		//Primer arreglo
+  Profesor arr2[20];		//Segundo arreglo
+  Profesor arrF[40];		//Arreglo final, con elementos fusionados y ordenados
+  int n1, n2, n3;		//Longitud de los arreglos
+  /*printf("Cuantos profes hay en la primer lista?: ");
+     scanf("%d", &n1);
+     printf("Cuantos profes hay en la segunda lista?: ");
+     scanf("%d", &n2); */
+  readArray (arr1, n1);		//leer el primer arreglo
+  readArray (arr2, n2);		//leer el segundo arreglo 
+  mergeArrays (arr1, n1, arr2, n2, arrF, n3);	//Fusionar los dos arreglos en un tercer arreglo
 
 //sortArray(arrF,);  //Ordenar los elementos del tercer arreglo, recuerde que pueden 
   //existir profesores repetidos
 
-printArray(arr1 , n1);   //Imprimir el resultado final
-printArray(arr2 , n2);
-//printArray(arrF , n3);
+//printArray(arr1 , n1);   //Imprimir el resultado final
+//printArray(arr2 , n2);
+  printArray (arrF, n3);
 }
 
-void readArray(Profesor *arr, int x)
+void
+readArray (Profesor * arr, int x)
 {
-    Profesor *p = arr;
-    for(int c=0; c<x; c++)
+  Profesor *p = arr;
+  int *px;
+  px=&x;
+  printf ("Cuantos profes hay en la lista?: ");
+  scanf ("%d", &(*px));
+  for (int c = 0; c < x; c++)
     {
-        scanf("%s",(*(p+c)).nombre);
-        scanf("%f",&(*(p+c)).calificacion);
-        getchar();
+      scanf ("%s", (*(p + c)).nombre);
+      scanf ("%f", &(*(p + c)).calificacion);
+      getchar ();
     }
 }
 
-void printArray(Profesor *arr , int x)
+void
+printArray (Profesor * arr, int x)
 {
-    Profesor *p = arr;
-    int c;
-    for(c=0;c<x;c++)
+  Profesor *p = arr;
+  int c;
+  for (c = 0; c < x; c++)
     {
-        printf("%s \t\t",(p+c)->nombre);
-        printf("%.2f \n",(p+c)->calificacion);
+      printf ("%s \t\t", (p + c)->nombre);
+      printf ("%.2f \n", (p + c)->calificacion);
     }
-  
+
 }
 
-void mergeArrays(Profesor *arr1 , int x, Profesor *arr2, int y, Profesor *arr3, int z)
+void
+mergeArrays (Profesor * arr1, int x, Profesor * arr2, int y, Profesor * arr3,
+	     int z)
 {
-    Profesor *p = arr3;
-    int i, dz;
-    z = x + y;
-    for(i=0;i<x;i++)
+  Profesor *p = arr3;
+  int i, c;
+  for (i = 0; i < x; i++)
     {
-        strcpy((p+i)->nombre, (arr1+i)->nombre);
-        (p+i)->calificacion = (arr1+i)->calificacion;
-        printf("%s, %.2f",(p+i)->nombre,(p+i)->calificacion);
-    } //Se copian los valores de la primer lista a la lista final
-     for(i=x;i<z;i++)
+      strcpy ((p + i)->nombre, (arr1 + i)->nombre);
+      (p + i)->calificacion = (arr1 + i)->calificacion;
+      printf ("%s, %.2f\n", (p + i)->nombre, (p + i)->calificacion);
+    }				//Se copian los valores de la primer lista a la lista final
+  for (c = x; c < z; c++)
     {
-        strcpy((p+i)->nombre, (arr2+i)->nombre);
-        (p+i)->calificacion = (arr2+i)->calificacion;
-    } //Se copian los valores de la segunda lista lista a la lista final
-    
-    //findMatch(*arr3, z);
+      strcpy ((p + c)->nombre, (arr2 + c - i)->nombre);
+      (p + c)->calificacion = (arr2 + c - i)->calificacion;
+      printf ("%s, %.2f\n", (p + c)->nombre, (p + c)->calificacion);
+    }				//Se copian los valores de la segunda lista lista a la lista final
+
+  //findMatch(*arr3, z);
 }
 
 /*void findMatch(Profesor *arr  , int x)
