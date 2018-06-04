@@ -1,0 +1,33 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int matriz[3][3];
+    int i,j;
+    int **m;
+    //reservar memoria para renglones
+    
+    m=(int**)malloc(sizeof(int*)*3);
+    if(m!=NULL)
+    {
+        for(i=0;i<3;i++)
+            m[i]=(int*)malloc(sizeof(int)*3);
+    }
+    
+    //Asignar valores a los elementos de la matriz
+    for(i=0;i<3;i++)
+        for(j=0;j<3;j++)
+            m[i][j]=7;
+            
+    //Imprimir elcontenido de la matriz
+    for(i=0;i<3;i++)
+    {
+        printf("\n");
+        for(j=0;j<3;j++)
+            printf("%d",m[i][j]);
+    }
+    
+    return 0;
+}
