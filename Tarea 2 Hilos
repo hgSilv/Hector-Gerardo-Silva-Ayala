@@ -27,7 +27,7 @@ int main(void)
     scanf("%d", &hilos);
     clock_t start = clock();
     Range range[hilos];
-    lli lim = 5000000 / hilos;
+    lli lim = 50000000000 / hilos;
 
     for(i=0; i<hilos; i++)
     {
