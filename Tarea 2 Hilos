@@ -4,13 +4,13 @@
 #include <time.h>
 
 
-typedef unsigned long long int ulli;
+typedef long long int lli;
 
 typedef struct
 {
-    ulli inicio;
-    ulli fin;
-    float sumaParcial;
+    lli inicio;
+    lli fin;
+    double sumaParcial;
 }Range; //estructura de parametros para el hilo
 
 
@@ -22,27 +22,26 @@ int main(void)
     int ms;
     int hilos;
     int i;
-    double pi ;
+    double pi = 0;
     printf("Hilos? \t ");
     scanf("%d", &hilos);
     clock_t start = clock();
-    Range * range =(Range*)malloc(hilos * sizeof(Range));
-    ulli lim = 5000000 / hilos;
+    Range range[hilos];
+    lli lim = 5000000 / hilos;
+
     for(i=0; i<hilos; i++)
     {
         range[i].inicio=(lim*i)+1;
         range[i].fin=lim*(i+1);
         range[i].sumaParcial=0;
     }//Asigna los parametros que enviaremos a los hilos
-    //Cada hilo empieza en diferentes posiciones gracias al ciclo, de esa forma
-    //aseguro que los hilos trabajen en diferentes partes de la serie
 
     HANDLE *p=(HANDLE*)calloc(hilos, sizeof(HANDLE));
 
     for(i=0; i<hilos; i++)
-        p[i]= CreateThread(NULL, 0, suma, (void *)&range[i], 0, NULL);
-    //
-    WaitForMultipleObjects(hilos, p, TRUE, INFINITE);
+        p[i]= CreateThread(NULL, 0, suma, (void *)&range[i], 0, NULL); //Crea los hilos segun la cantidad que necesita el usuario
+    for(i=0; i<hilos; i++)
+        WaitForSingleObject(p[i], INFINITE); //Espera a cada hilo
     for(i=0; i<hilos; i++)
         pi = pi+range[i].sumaParcial;
     pi = pi*4;
@@ -50,8 +49,9 @@ int main(void)
     ms = 1000*(stop-start)/CLOCKS_PER_SEC;
     printf("\n Pi:\t %.10f\n", pi);
     printf("Tiempo\t = %d ms", ms);
-    free(range);
     free(p);
+
+
 
     return EXIT_SUCCESS;
 
@@ -59,16 +59,14 @@ int main(void)
 
 DWORD WINAPI suma(void *param)
 {
-    Range *r= (Range*)param;
+    Range * r= (Range*)param;
     unsigned long long int i;
     for(i=r->inicio;i<r->fin;i++)
     {
         if(i&1)
-            r->sumaParcial += 1.0/(2*i1);
+            r->sumaParcial += 1.0/(2*i-1);
         else
-            r->sumaParcial -= 1.0/(2*i+1);
+            r->sumaParcial -= 1.0/(2*i-1);
     }
     return 0;
-}
-
 }
