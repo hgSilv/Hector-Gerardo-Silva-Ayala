@@ -4,17 +4,17 @@
 int main()
 
 {
-    unsigned long long int cont;
-    float total=0;
-    unsigned long long int num = 50000000000;
+    long long int cont;
+    double total=0;
+    long long int num = 50000000000;
     clock_t start = clock();
 
-    for(cont=0;cont<num;cont++)
+    for(cont=1;cont<=num;cont++)
     {
         if(cont&1)
-            total -= 1.0/(2*cont+1);
+            total += 1.0/(2*cont-1);
         else
-            total += 1.0/(2*cont+1);
+            total -= 1.0/(2*cont-1);
     }
     clock_t stop = clock();
 
@@ -25,4 +25,5 @@ int main()
 
     return 0;
 
-}
+} 
+
