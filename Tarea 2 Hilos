@@ -14,7 +14,7 @@ typedef struct
 }Range; //estructura de parametros para el hilo
 
 
-DWORD WINAPI suma(void * param);
+DWORD WINAPI suma(void *param);
 
 int main(void)
 {
@@ -22,12 +22,12 @@ int main(void)
     int ms;
     int hilos;
     int i;
-    float pi ;
+    double pi ;
     printf("Hilos? \t ");
     scanf("%d", &hilos);
     clock_t start = clock();
     Range * range =(Range*)malloc(hilos * sizeof(Range));
-    ulli lim = 50000000000 / hilos;
+    ulli lim = 5000000 / hilos;
     for(i=0; i<hilos; i++)
     {
         range[i].inicio=(lim*i)+1;
@@ -43,7 +43,7 @@ int main(void)
         p[i]= CreateThread(NULL, 0, suma, (void *)&range[i], 0, NULL);
     //
     WaitForMultipleObjects(hilos, p, TRUE, INFINITE);
-    for(i=0; i<lim; i++)
+    for(i=0; i<hilos; i++)
         pi = pi+range[i].sumaParcial;
     pi = pi*4;
     clock_t stop = clock();
@@ -61,10 +61,14 @@ DWORD WINAPI suma(void *param)
 {
     Range *r= (Range*)param;
     unsigned long long int i;
-    for(i=r->inicio;i<=r->fin;i++)
+    for(i=r->inicio;i<r->fin;i++)
+    {
         if(i&1)
-            r->sumaParcial -= 1.0/(2*i+1);
+            r->sumaParcial += 1.0/(2*i1);
         else
-            r->sumaParcial += 1.0/(2*i+1);
-    return NULL;
+            r->sumaParcial -= 1.0/(2*i+1);
+    }
+    return 0;
+}
+
 }
