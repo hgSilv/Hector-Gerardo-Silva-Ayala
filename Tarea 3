@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int opcion, opcion1;
+    int salida, salida1 = 0;
+    do
+    {
+        printf("<<Sistema MyDB>>\n1.\tClientes\n2.\tCuentas\n3.\tTransacciones\n4.\tSalir\n");
+        scanf("%d", &opcion);
+        switch (opcion)
+            case 1:
+                {
+                    do{
+                    printf("<<Sistema MyDB: Clientes>>\n1.\tNuevo Cliente\n2.\tBuscar Cliente\n3.\tEliminar Cliente\n4.\tImprimir Cliente\n5.\tSalir\n");
+                    scanf("%d", &opcion1);
+                    switch(opcion1)
+                    case 1: printf("Nuevo cliente");
+                            break;
+                    case 2: printf("Buscar Cliente");
+                            break;
+                    case 3: printf("Eliminar Cliente");
+                            break;
+                    case 4: printf("Imprimir Clientes");
+                            break;
+                    case 5: salida1=1;
+                            break;
+                    default:    printf("Opcion no valida, intente de nuevo\n");
+                                break;
+                    }while(salida1==0);
+                }
+                break;
+    } while(salida==0);
+    return 0;
+}
