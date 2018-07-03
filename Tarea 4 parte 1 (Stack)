@@ -1,0 +1,45 @@
+//GMO-HS
+#include <stdio.h>
+#include <string.h>
+#include "Stack.h"
+
+bool balancedBrackets(char *exp);
+
+int main(){
+
+    bool res;
+    char expresion[50];
+    printf("Introduce la expresion: \n ");
+    gets(expresion);
+    res = balancedBrackets(expresion);
+    if(res==true)
+        printf("\nLa expresion esta correctamente balanceada. \n");
+    else
+        printf("\nLa expresion esta incorrectamente balanceada. \n");
+
+
+	return 0;
+}
+
+bool balancedBrackets(char *exp)
+{
+    int i, x;
+    int *t, *check;
+    Stack temp;
+    temp = createStack();
+    for(i=0; i<strlen(exp); i++)
+    {
+
+        if((exp[i] == '[')||(exp[i] == '('))
+            push(temp, (&x)); //Se genera un nodo en el stack por cada [ o (
+
+        else if ((exp[i] == ']')||(exp[i] == ')'))
+            t = pop(temp); //Se elimina un nodo en el stack por cada [ o (
+    }
+    check = top(temp);
+    if(check != NULL) //Aqui es donde decidimos que se retorna, si top=NULL entonces true porque todos los [ o ( tienen una contraparte correspondiente.
+        return false; //De otra manera se retorna false al encontrarse un nodo aun en la pila
+    else
+        return true;
+    destroyStack(temp); //Liberamos la memoria usada por stack
+}
