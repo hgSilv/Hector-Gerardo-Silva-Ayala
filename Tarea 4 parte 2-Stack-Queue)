@@ -1,0 +1,110 @@
+//GMO-HS
+#include <stdio.h>
+#include <string.h>
+#include "Stack.h"
+#include "Queue.h"
+
+char * InfixToPosfix(char *exp);
+bool hasHigherPrecedence(char* top, char *op);
+
+int main(){
+    char expr[50];
+    char *fexpr;
+    printf("\nDame una expresion\n");
+    gets(expr);
+    fexpr = InfixToPosfix(expr);
+    printf("\n La expresion en Posfix es: %s", fexpr);
+
+	return 0;
+}
+
+char * InfixToPosfix(char *exp)
+{
+    int i;
+    Stack tStack;
+    Queue fQueue, tQueue;
+    tStack = createStack();
+    fQueue = create_queue();
+    tQueue = create_queue();
+    char *temp, *band, *actQ, *spoper;
+    for(i=0; i<strlen(exp); i++)
+    {
+        offer_queue(tQueue, exp[i]); //se asigna cada caracter de la expresion a un nodo del Queue
+    }
+    printf("%d\n", size_queue(tQueue));
+
+    while(size_queue(tQueue)!=0)
+    {
+
+        actQ = peek_queue(tQueue); //Se asigna el valor del nodo "First del Q a una variable"
+
+        if((actQ<=57)&&(actQ>=48))
+        {
+            offer_queue(fQueue, (char*) poll_queue(tQueue));
+        } //Cualquier numero se asigna directamente a un nodo del Q final
+        else if(actQ=='(')
+            {
+            push(tStack, (char*) poll_queue(tQueue));
+
+            } //Al encontrarse con un ( este se inserta en la pila
+        else if((actQ == '+')||(actQ == '-')||(actQ== '*')||(actQ== '/')) //buscamos cualquier operador
+        {
+
+            while((top(tStack))!=NULL)
+            {
+
+                while(top(tStack)!='(')
+                {
+                    if(hasHigherPrecedence( top(tStack), peek_queue(tQueue)))
+                    {
+                        spoper = (char*) pop(tStack);
+                        offer_queue(fQueue, spoper); //Si se encuentra presedencia a favor del valor en stack, se asigna este valor al Q final
+                    }
+                    else
+                        break;
+                }
+                break;
+            }
+            push(tStack, (char*) poll_queue(tQueue)); //Se asigna el operador al stack
+        }
+        else if(*actQ == ')')
+            while(top(tStack)!=NULL)
+            {
+                while(top(tStack)!='(')
+                {
+                    spoper = (char*) pop(tStack);
+                    offer_queue(fQueue, spoper); //al encontrarse con el )se asigna el top de Stack a Q final
+                }
+            if(top(tStack)=='(')
+                spoper = (char*) pop(tStack); //Se elimina de Stack el (
+            }
+        else
+            while(top(tStack)!=NULL)
+            {
+                spoper = (char*) pop(tStack); //De cualquier otra forma, todos los valores de Stack se asignan en orden debido a Q Final
+                offer_queue(fQueue,  spoper);
+            }
+    }
+    i=0;
+    while(size_queue(fQueue)!=0)
+    {
+        temp[i] = poll_queue(fQueue); //Se arma un string con los valores char de Q
+        i++;
+    }
+
+    return temp; //Retorno de string
+
+}
+
+bool hasHigherPrecedence(char* top, char *op)
+{
+    if((top=='*') || (top=='/')) //Si Top es * o /
+    {
+        if((op=='*') || (op=='/')) //Top se presenta primero que op, por lo tanto izq tiene presedencia
+            return false;
+        else
+            return true; //De otro modo, op tiene presedencia
+    }
+    else
+        return false; //de cualquier otra forma, top tiene presedencia sobre op
+}
