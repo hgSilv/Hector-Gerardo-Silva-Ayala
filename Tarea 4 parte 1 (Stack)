@@ -23,23 +23,32 @@ int main(){
 
 bool balancedBrackets(char *exp)
 {
-    int i, x;
+    int i;
     int *t, *check;
     Stack temp;
     temp = createStack();
     for(i=0; i<strlen(exp); i++)
     {
-
         if((exp[i] == '[')||(exp[i] == '('))
-            push(temp, (&x)); //Se genera un nodo en el stack por cada [ o (
-
-        else if ((exp[i] == ']')||(exp[i] == ')'))
-            t = pop(temp); //Se elimina un nodo en el stack por cada [ o (
+            push(temp, (exp[i])); //Se genera un nodo en el stack por cada [ o (
+        else if((exp[i] == ']'))
+        {
+            t = pop(temp);
+            if(t == '(')
+               return false; //Si se encuentra un ( para un ] se determina false
+        }
+        else if((exp[i]== ')'))
+        {
+            t = pop(temp);
+            if(t == '[')
+               return false; //Si se encuentra un [ para un ) se determina false
+            
+        }
     }
-    check = top(temp);
-    if(check != NULL) //Aqui es donde decidimos que se retorna, si top=NULL entonces true porque todos los [ o ( tienen una contraparte correspondiente.
-        return false; //De otra manera se retorna false al encontrarse un nodo aun en la pila
-    else
+    if(top(temp)==NULL) //Si no quedan nodos en Stack se determina true
         return true;
-    destroyStack(temp); //Liberamos la memoria usada por stack
+    else
+        return false; //Cualquier otro resultado es False
+
 }
+
